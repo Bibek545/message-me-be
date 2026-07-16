@@ -13,8 +13,10 @@ const PORT = process.env.PORT || 3000
 
 await mongoConnect();
 
+app.use(express.json());
 //connecting routes
 app.use("/api/v1/auth", authRoutes )
+
 app.get('/',(req,res) => {
     res.send('The Message me backend is live')
 });
