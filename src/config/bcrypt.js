@@ -6,6 +6,6 @@ export const hashPassword = async (password) => {
   return hash; //store the hash password in the database
 };
 
-export const comparePassword = (password, hashPassword) => {
+export const comparePassword = async (password, hashPassword) => {
  return bcrypt.compare(password, hashPassword);
 };
