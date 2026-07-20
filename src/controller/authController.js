@@ -5,9 +5,11 @@ import User from "../models/users/userSchema.js";
 
 export const insertNewUser = async (req, res) => {
   //fetching the user from the body
+  console.log(req.body);
   const { fName, lName, email, phone, password, confirmPassword } = req.body;
 
-  if (!fName || !lName || !email || !phone || !password || !confirmPassword) {
+
+  if (!fName || !lName || !email || !phone || !password) {
     return res.status(400).json({
       status: "error",
       message: "All the fields are required",
@@ -72,10 +74,19 @@ export const loginUser = async (req, res) => {
 
   const token = generateToken(findUser);
 
-  return res.send({
-    message: "Login Successsful",
+const user = {
+  id: findUser._id,
+  fName: findUser.fName,
+  lName: findUser.lName,
+  email: findUser.email,
+};
+
+return res.status(200).json({
+  status: "success",
+  message: "Login successful",
+  data: {
+    user,
     token,
-    status: "success",
-    findUser,
-  });
+  },
+});
 };
